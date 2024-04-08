@@ -1,23 +1,11 @@
 const NodeHelper = require("node_helper");
-//const { google } = require("googleapis");
 const fs = require('fs');
 const path = require('path');
-//const express = require('express');
 //const moment = require('moment-timezone');
-//const OAuth2 = google.auth.OAuth2;
-
-// Path to the secrets.json file
-const secretsPath = path.join(__dirname, 'secrets.json');
-const credentialsPath = path.join(__dirname, 'credentials.json');
-
-// Read the secrets file
-let secrets = JSON.parse(fs.readFileSync(secretsPath, 'utf8'));
-// Read the credentials file
-const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
 
 module.exports = NodeHelper.create({
   start: function() {
-    console.log("MMM-GoogleCalendarEventAdder helper started...");
+    console.log("MMM-WebCalEventAdder helper started...");
   },
 
   socketNotificationReceived: function(notification, payload) {
@@ -35,57 +23,12 @@ module.exports = NodeHelper.create({
       }
   },
 
-  getNewToken: function(oauth2Client, callback) {
-    var authUrl = oauth2Client.generateAuthUrl({
-      access_type: 'offline',
-      scope: ['https://www.googleapis.com/auth/calendar']
-    });
-    console.log('Authorize this app by visiting this url: ', authUrl);
-
-    var app = express();
-
-    app.get('/oauth2callback', function(req, res) {
-      var code = req.query.code;
-      if (code) {
-        oauth2Client.getToken(code, function(err, token) {
-          if (err) {
-            console.log('Error while trying to retrieve access token', err);
-            return;
-          }
-          oauth2Client.credentials = token;
-          secrets = {...secrets, ...token};
-          fs.writeFileSync(secretsPath, JSON.stringify(secrets)); // Store the token
-          callback(oauth2Client);
-          res.send('Authentication successful! Please return to the console.');
-          process.exit(1); // Stop the Express server
-        });
-      } else {
-        res.send('Authentication failed! Please return to the console.');
-      }
-    });
-
-    app.listen(3000, function () {
-      console.log('App listening on port 3000');
-    });
-  },
-
   addCalendarEvent: function(payload) {
-    const oauth2Client = new OAuth2(
-      credentials.installed.client_id,
-      credentials.installed.client_secret,
-      credentials.installed.redirect_uris[0],
-    );
 
-    // Check if we have previously stored a token.
-    if (secrets.access_token && secrets.refresh_token) {
-      oauth2Client.credentials = secrets;
-      this.insertCalendarEvent(payload, oauth2Client);
-    } else {
-      this.getNewToken(oauth2Client, this.insertCalendarEvent.bind(this, payload));
-    }
+      this.insertCalendarEvent(payload);
   },
 
-  insertCalendarEvent: function(payload, oauth2Client) {
+  insertCalendarEvent: function(payload) {
     const startTime = moment(payload.startTime).tz("America/New_York").format();
     const endTime = moment(payload.endTime).tz("America/New_York").format();
 
@@ -122,7 +65,7 @@ module.exports = NodeHelper.create({
     calendar.events.insert(
       {
         auth: oauth2Client,
-        calendarId: "primary",
+        calendarId: "family",
         resource: event,
       },
       (err, event) => {
@@ -141,17 +84,6 @@ module.exports = NodeHelper.create({
   updateCalendarEvent: function(payload) {
     console.log('Received payload:', payload);
 
-      const oauth2Client = new OAuth2(
-	credentials.installed.client_id,
-	credentials.installed.client_secret,
-	credentials.installed.redirect_uris[0],
-      );
-
-      // Check if we have previously stored a token.
-      if (secrets.access_token && secrets.refresh_token) {
-	oauth2Client.credentials = secrets;
-	const calendar = google.calendar({ version: "v3", auth: oauth2Client });
-	
 	const startTime = moment(payload.startTime).tz("America/New_York").format();
 	const endTime = moment(payload.endTime).tz("America/New_York").format();
 	
@@ -180,9 +112,6 @@ module.exports = NodeHelper.create({
 	  this.sendSocketNotification("EVENT_UPDATE_SUCCESS", {});
 	});
 
-      } else {
-	this.getNewToken(oauth2Client, this.updateCalendarEvent.bind(this, payload));
-      }
   },
 
   deleteCalendarEvent: function(payload) {
@@ -193,10 +122,6 @@ module.exports = NodeHelper.create({
       );
 
       // Check if we have previously stored a token.
-      if (secrets.access_token && secrets.refresh_token) {
-	oauth2Client.credentials = secrets;
-	const calendar = google.calendar({ version: "v3", auth: oauth2Client });
-	
 	calendar.events.delete({
 	  calendarId: 'primary',
 	  eventId: payload.eventId,  // Assuming you have the eventId in your payload
@@ -209,9 +134,6 @@ module.exports = NodeHelper.create({
 	  this.sendSocketNotification("EVENT_DELETE_SUCCESS", {});
 	});
 
-      } else {
-	this.getNewToken(oauth2Client, this.deleteCalendarEvent.bind(this, payload));
-      }
   },
 })
 
