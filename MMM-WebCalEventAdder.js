@@ -1,4 +1,4 @@
-Module.register("MMM-GoogleCalendarEventAdder", {
+Module.register("MMM-WebCalEventAdder", {
     // Default module configuration
     defaults: {
         text: "Add event"
@@ -14,7 +14,7 @@ Module.register("MMM-GoogleCalendarEventAdder", {
     },
 
     getStyles: function () {
-        return ['MMM-GoogleCalendarEventAdder.css', 'https://use.fontawesome.com/releases/v5.15.3/css/all.css'];
+        return ['MMM-WebCalEventAdder.css', 'https://use.fontawesome.com/releases/v5.15.3/css/all.css'];
     },
 
     createFormElement: function (element, attributes, properties) {
@@ -32,7 +32,7 @@ Module.register("MMM-GoogleCalendarEventAdder", {
         let wrapper = document.createElement("div");
 
         // Assign the ID to the wrapper
-        wrapper.id = "MMM-GoogleCalendarEventAdder";
+        wrapper.id = "MMM-WebCalEventAdder";
 
         // If there's a message to show
         if (this.message) {
@@ -95,14 +95,14 @@ Module.register("MMM-GoogleCalendarEventAdder", {
 
         // Create Jason Work Shortcut
         let jasonWorkButton = document.createElement('img');
-        jasonWorkButton.src = 'modules/MMM-GoogleCalendarEventAdder/icon/jason_icon.png';
+        jasonWorkButton.src = 'modules/MMM-WebCalEventAdder/icon/jason_icon.png';
         jasonWorkButton.alt = "Add Jason Work";
         jasonWorkButton.classList.add("jasonWorkButton");
         formContentContainer.appendChild(jasonWorkButton);
 
         // Create Champions Shortcut
         let championsButton = document.createElement('img');
-        championsButton.src = 'modules/MMM-GoogleCalendarEventAdder/icon/C_logo.png';
+        championsButton.src = 'modules/MMM-WebCalEventAdder/icon/C_logo.png';
         championsButton.alt = "Add Champions Day";
         championsButton.classList.add("championsButton");
         formContentContainer.appendChild(championsButton);

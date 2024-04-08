@@ -1,6 +1,6 @@
 /* Event Add Status Message */
-#MMM-GoogleCalendarEventAdder .message,
-#MMM-GoogleCalendarEventAdder .message.info {
+#MMM-WebCalEventAdder .message,
+#MMM-WebCalEventAdder .message.info {
     position: absolute;
     width: 400px;
     top: 0px;
@@ -14,27 +14,27 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-#MMM-GoogleCalendarEventAdder .message.success {
+#MMM-WebCalEventAdder .message.success {
     background-color: transparent;
     color: #4CAF50;
     font-size: 30px !important;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-#MMM-GoogleCalendarEventAdder .message.error {
+#MMM-WebCalEventAdder .message.error {
     background-color: transparent;
     color: #f44336;
     font-size: 30px !important;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Magic Mirror Google Calendar Event Adder Styles */
-#MMM-GoogleCalendarEventAdder button {
+/* Magic Mirror WebCal Event Adder Styles */
+#MMM-WebCalEventAdder button {
     cursor: pointer;
     /* background-color: white; setting the background color of button to white */
 }
 
-#MMM-GoogleCalendarEventAdder .add-event-button {
+#MMM-WebCalEventAdder .add-event-button {
     /* Positioning the button in the top right of the calendar */
     position: absolute;
     top: 80px;
@@ -58,7 +58,7 @@
     box-shadow: -2px 5px 8px rgba(0, 0, 0, 0.3);
 }
 
-#MMM-GoogleCalendarEventAdder .add-event-button i {
+#MMM-WebCalEventAdder .add-event-button i {
     /* Creating a gradient effect for the plus icon and making it larger */
     font-size: 28px; /* you may adjust this based on your preference */
     background: -webkit-linear-gradient(left, #FBBC05, #EA4335, #34A853, #4285F4);
@@ -66,12 +66,12 @@
     -webkit-text-fill-color: transparent;
 }
 
-#MMM-GoogleCalendarEventAdder {
+#MMM-WebCalEventAdder {
     font-family: 'Roboto', sans-serif;
     color: #444;
 }
 
-#MMM-GoogleCalendarEventAdder form {
+#MMM-WebCalEventAdder form {
     position: fixed;
     top: 45%;
     left: 50%;
@@ -85,12 +85,12 @@
     justify-content: space-between;
 }
 
-#MMM-GoogleCalendarEventAdder .form-group { /* Add padding to form elements */
+#MMM-WebCalEventAdder .form-group { /* Add padding to form elements */
     padding: 0px 10px;
     text-align: left;
 }
 
-#MMM-GoogleCalendarEventAdder .headerBar {
+#MMM-WebCalEventAdder .headerBar {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     width: 100%;
@@ -102,7 +102,7 @@
     box-sizing: border-box;
 }
 
-#MMM-GoogleCalendarEventAdder .btn[type="cancel"] {
+#MMM-WebCalEventAdder .btn[type="cancel"] {
     position: absolute;
     top: 3px;
     right: 10px;
@@ -141,7 +141,7 @@
     cursor: pointer
 }
 
-#MMM-GoogleCalendarEventAdder .btn[type="cancel"]:hover {
+#MMM-WebCalEventAdder .btn[type="cancel"]:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -149,11 +149,11 @@
     background-color: transparent;
 }
 
-#MMM-GoogleCalendarEventAdder input[type="text"],
-#MMM-GoogleCalendarEventAdder input[type="datetime-local"],
-#MMM-GoogleCalendarEventAdder input[type="date"],
-#MMM-GoogleCalendarEventAdder input[type="checkbox"],
-#MMM-GoogleCalendarEventAdder button {
+#MMM-WebCalEventAdder input[type="text"],
+#MMM-WebCalEventAdder input[type="datetime-local"],
+#MMM-WebCalEventAdder input[type="date"],
+#MMM-WebCalEventAdder input[type="checkbox"],
+#MMM-WebCalEventAdder button {
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -162,7 +162,7 @@
     transition: all 0.3s ease;
 }
 
-#MMM-GoogleCalendarEventAdder button[type="delete"].btn {
+#MMM-WebCalEventAdder button[type="delete"].btn {
     position: absolute;
     left: 10px;
     bottom: 10px;
@@ -173,14 +173,14 @@
     line-height: 100px;  
 }
 
-#MMM-GoogleCalendarEventAdder .time-container {
+#MMM-WebCalEventAdder .time-container {
     display: flex;
     justify-content: space-between;
     padding-top: 5px;
 }
 
-#MMM-GoogleCalendarEventAdder input[type="date"],
-#MMM-GoogleCalendarEventAdder input[type="datetime-local"] {
+#MMM-WebCalEventAdder input[type="date"],
+#MMM-WebCalEventAdder input[type="datetime-local"] {
     width: 90%; /* Or any width that you prefer */
     font-size: 18px;
 }
@@ -189,23 +189,23 @@
     padding: 5px 15px 5px 15px;
 }
 
-#MMM-GoogleCalendarEventAdder input[type="text"] {
+#MMM-WebCalEventAdder input[type="text"] {
     width: 100%;
     height: 60px;
     font-size: 26px;
 }
 
-#MMM-GoogleCalendarEventAdder [type="checkbox"] {
+#MMM-WebCalEventAdder [type="checkbox"] {
     font-size: 18px;
 }
 
-#MMM-GoogleCalendarEventAdder .submit-button-container {
+#MMM-WebCalEventAdder .submit-button-container {
     display: flex;
     justify-content: flex-end;
     padding-top: 5px;
 }
 
-#MMM-GoogleCalendarEventAdder .btn[type="submit"] {
+#MMM-WebCalEventAdder .btn[type="submit"] {
     margin-left: auto;
     background-color: #4285F4;
     color: white;
@@ -216,8 +216,8 @@
     cursor: pointer;
 }
 
-#MMM-GoogleCalendarEventAdder .btn[type="submit"]:hover,
-#MMM-GoogleCalendarEventAdder .btn[type="submit"]:focus {
+#MMM-WebCalEventAdder .btn[type="submit"]:hover,
+#MMM-WebCalEventAdder .btn[type="submit"]:focus {
     background-color: rgba(0, 0, 0, 0.1);
     font-size: 18px;
 }
